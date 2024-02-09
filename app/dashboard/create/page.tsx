@@ -55,16 +55,19 @@ const CreatePage = () => {
 
     }
     return (
-        <div>
-            <h1>Registro de animal</h1>
-            <div>
-                <form action="" onSubmit={handleSubmit}>
+        <div className="bg-blue-950 w-full min-h-screen text-white">
+            <div className="w-full min-h-screen flex justify-center items-center">
+                <form onSubmit={handleSubmit} className="border-2 border-blue-400 p-10 rounded-2xl">
+                    <header className="text-center py-2">
+                        <h1 className="text-3xl font-bold">Registro de animal</h1>
+                    </header>
                     <input
                         type="text"
                         placeholder='Nombre'
                         name='name'
                         onChange={handleChange}
                         value={name}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -72,6 +75,7 @@ const CreatePage = () => {
                         name='category'
                         onChange={handleChange}
                         value={category}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -79,6 +83,7 @@ const CreatePage = () => {
                         name='behavior'
                         onChange={handleChange}
                         value={behavior}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -86,8 +91,11 @@ const CreatePage = () => {
                         name='description'
                         onChange={handleChange}
                         value={description}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
-                    <button type='submit'>Crear Animal</button>
+                    <div className="text-center">
+                    <button type='submit' className="bg-blue-600 w-full p-2 rounded hover:bg-blue-400">Crear Animal</button>
+                    </div>
                 </form>
             </div>
         </div>

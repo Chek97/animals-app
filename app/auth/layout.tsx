@@ -1,10 +1,9 @@
-import React from 'react'
 
-const layout = ({ children }: Readonly<{
-    children: React.ReactNode;
-}>) => {
+const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     return (
-        <div>{children}</div>
+        <div className='bg-blue-950 w-full min-h-screen text-white'>
+            {children}
+        </div>
     )
 }
 

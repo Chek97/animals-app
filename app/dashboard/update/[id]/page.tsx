@@ -34,16 +34,13 @@ const UpdatePage = () => {
         }
 
         const token = localStorage.getItem("user");
-        const payload = jwt.decode(token, { complete: true });
+        //const payload = jwt.decode(token, { complete: true });
 
-        const newData = {
-            ...form,
-            user_id: payload.payload.id
-        }
 
+        delete form.id;
 
         try {
-            const response = await axios.post("http://localhost:3000/api/animals", JSON.stringify(newData), {
+            const response = await axios.put(`http://localhost:3000/api/animals/${id}`, JSON.stringify(form), {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -57,17 +54,37 @@ const UpdatePage = () => {
 
     }
 
+    useEffect(() => {
+        const getAnimal = async () => {
+            try {
+                const token = localStorage.getItem("user");
+                const response = await axios.get(`http://localhost:3000/api/animals/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setForm(response.data.animal[0]);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAnimal();
+    }, []);
+
     return (
-        <div>
-            <h1>Registro de animal</h1>
-            <div>
-                <form action="" onSubmit={handleSubmit}>
+        <div className="bg-blue-950 w-full min-h-screen text-white">
+            <div className="w-full min-h-screen flex justify-center items-center">
+                <form onSubmit={handleSubmit} className="border-2 border-blue-400 p-10 rounded-2xl">
+                    <header className="text-center py-2">
+                        <h1 className="text-3xl font-bold">Actualizacion del animal</h1>
+                    </header>
                     <input
                         type="text"
                         placeholder='Nombre'
                         name='name'
                         onChange={handleChange}
                         value={name}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -75,6 +92,7 @@ const UpdatePage = () => {
                         name='category'
                         onChange={handleChange}
                         value={category}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -82,6 +100,7 @@ const UpdatePage = () => {
                         name='behavior'
                         onChange={handleChange}
                         value={behavior}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
                     <input
                         type="text"
@@ -89,8 +108,11 @@ const UpdatePage = () => {
                         name='description'
                         onChange={handleChange}
                         value={description}
+                        className="p-2 w-full mb-5 mt-2 rounded text-black"
                     />
-                    <button type='submit'>Crear Animal</button>
+                    <div className="text-center">
+                        <button type='submit' className="bg-blue-600 w-full p-2 rounded hover:bg-blue-400">Actualizar Animal</button>
+                    </div>
                 </form>
             </div>
         </div>
